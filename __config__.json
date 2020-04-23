@@ -1,0 +1,19 @@
+{
+    "Speecher": {
+        "Content": [
+            "Dim message_to_speak",
+            "Dim sapi_svoice",
+            "Set sapi_svoice = CreateObject()",
+            "sapi_svoice.Speak message_to_speak"
+        ],
+        "Functions": {
+            "open google search": {"message": "Opening Google Chrome Browser To Search, Please Wait!"},
+            "youtube search": {"message": "Opening Youtube Website To Search, Please Wait!"},
+            "search in google": {"message": "Searching in Google, Please Wait! "},
+            "search in youtube": {"message": "Searching in Youtube, Please Wait! "},
+            "open notepad": {"message": "Opening Notepad Application, Please Wait! "},
+            "please type": {"message": "Typing requested text, Please Wait! "}
+        },
+        "Exception": "No such command, please only speak an appropriate command"
+    }
+}
