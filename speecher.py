@@ -72,20 +72,24 @@ class Transform():
     def open_sapi(self) -> object:
         with open(file=self.sapi, mode="r", encoding="utf-8") as sp_source:
             self.spvoice_source = sp_source.read()
-            sp_source.close()
-        os.remove(self.sapi)
+            sp_source.close()        
         return self
     
     def write_spvoice(self, message: str) -> object:
         try:
-            self.sapi_content.insert(3, 'message_to_speak="{message}"'.format(message=message))
+            index = len(self.spvoice_source.split("\n"))
+            print(index, self.spvoice_source.split("\n"))
+            self.sapi_content.insert(index-2, 'message_to_speak="{message}"'.format(message=message))
             with open(file=self.sapi, mode="w+", encoding="utf-8") as sp_source:
                 for content in self.sapi_content:
                     if '()' in content:
                         arr_content = content.split("(")
                         arr_content.insert(1, '("sapi.spvoice"')
-                        content = "".join(arr_content)                        
-                    sp_source.write("%s\n"%content)
+                        content = "".join(arr_content)  
+                    if 'sapi_svoice.Speak' in content:
+                        sp_source.write("%s"%content)
+                    else:
+                        sp_source.write("%s\n"%content)
                 sp_source.close()                
         except Exception as e:
             print(e)
